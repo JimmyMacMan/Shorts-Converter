@@ -83,7 +83,8 @@ def ffmpeg_gpu_shorts_generator(
     progress_x_expr = f"-W+W*(t/{clip_length}-floor(t/{clip_length}))"
 
     safe_prefix = title_prefix.replace(":", "\\:").replace("'", "\\'")
-    part_text_expr = f"{safe_prefix}Part %{{eif:trunc((t+0.01)/{clip_length})+1:d}}"
+    # Fully escaped eif expression with both required arguments (expression and format :d)
+    part_text_expr = f"{safe_prefix}Part %{{eif\\:trunc((t+0.01)/{clip_length})+1\\:d}}"
     font_arg = get_default_font_arg()
 
     drawtext_filter = (
@@ -154,14 +155,12 @@ def ffmpeg_gpu_shorts_generator(
     print(f"Done! Clips saved to '{output_folder}'.")
 
 if __name__ == "__main__":
-    # Get dragged video path from command line, or default to "input_video.mp4"
     input_path = sys.argv[1] if len(sys.argv) > 1 else "input_video.mp4"
 
     if not os.path.exists(input_path):
         print(f"Error: File not found -> {input_path}")
         sys.exit(1)
 
-    # Create an output folder right next to the input video named "<videoname>_shorts"
     video_dir = os.path.dirname(os.path.abspath(input_path))
     video_stem = os.path.splitext(os.path.basename(input_path))[0]
     auto_output_folder = os.path.join(video_dir, f"{video_stem}_shorts")
