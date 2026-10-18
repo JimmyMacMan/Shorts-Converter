@@ -1,6 +1,28 @@
 # 🎬 Automated 9:16 Shorts, Reels & TikTok Clip Generator
 
-A zero-dependency, GPU-accelerated Python & FFmpeg tool that automatically converts widescreen (16:9) videos into numbered, 30-second vertical (9:16) clips ready for **TikTok, Instagram Reels, and YouTube Shorts**.
+> ✨ **Note: This project was 100% "Vibe Coded"** *(vide coded)* — built iteratively through conversational AI prompts, zero manual boilerplate, and pure creative flow.
+
+A GPU-accelerated Python & FFmpeg tool that automatically converts widescreen (16:9) videos into numbered, 30-second vertical (9:16) clips—complete with a blurred background, animated progress bar, and auto-incrementing **"Part 1, Part 2..."** banners—ready for **TikTok, Instagram Reels, and YouTube Shorts**.
+
+---
+
+## 📦 Dependencies & Prerequisites
+
+### 1. System Dependencies (Required)
+* **Python 3.8+** — Uses only Python's built-in standard library modules (`os`, `sys`, `platform`, `subprocess`, `math`), so **no `pip install` is required** for the main FFmpeg script.
+* **FFmpeg & FFprobe** — Must be installed and available in your system `PATH` (includes `libx264`, `drawtext`, `gblur`, and hardware encoder support).
+* **System Font** — Uses standard pre-installed OS fonts for the `"Part X"` banner (`arialbd.ttf` on Windows, `Arial Bold.ttf` / `Helvetica.ttc` on macOS, or `DejaVuSans-Bold.ttf` on Linux).
+
+### 2. Optional Hardware Acceleration
+* **NVIDIA GPU:** NVIDIA Driver `450.0+` (for `h264_nvenc`)
+* **Apple Silicon:** M1 / M2 / M3 / M4 Mac (for `h264_videotoolbox`)
+* **Intel / AMD:** Intel QuickSync (`h264_qsv`) or AMD Radeon AMF (`h264_amf`)
+
+### 3. Optional Python Packages *(Only if using the legacy MoviePy script)*
+If you use the pure-Python MoviePy version instead of the fast FFmpeg `subprocess` script:
+```bash
+pip install moviepy numpy Pillow
+```
 
 ---
 
@@ -46,7 +68,7 @@ Instead of decoding and re-encoding video frames slowly in Python, this tool bui
    ```
 
 ### Step 2: Set Up the Project Folder
-Create a folder (e.g., `C:\ShortsGenerator`) containing these two files:
+Create a folder (e.g., `C:\ShortsGenerator`) containing these files:
 
 ```text
 C:\ShortsGenerator\
